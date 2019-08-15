@@ -8,7 +8,7 @@ import h5py
 import scipy;
 from PIL import Image
 from scipy import ndimage
-import random 
+import random # for testing purposes
 
 def print_image(index):
     index = 25
@@ -38,7 +38,7 @@ def zero_param_init(dim):
 
 def random_param_init(dim):
     """ randomly initialize parameters to values close  to zero
-        input: int indicating corresponding to the number of random figures to create
+        input: corresponding to the number of random figures to create
         returns: initialized weight vector (w), and initialized bias (b)
     """
     # TODO
@@ -47,43 +47,52 @@ def random_param_init(dim):
 def flatten_and_standardize(data):
     """ Flattens data so that dimensions would be compatible during vectorized operations"""
     return data.reshape(data.shape[0], -1).T/255
-# def standardize(data):
-#     """ Assumes that data is a numpy array
-#     """
-#     return data/255
+
 
 def propagate(w, b, X, Y):
     """ This carries out forward, and back propagation, in the network
         All operations within this function are vectorized implementations
-        input: weight parameters and bias(w, b).
-               input features and, output values(X, y).
-               All input values except b are vectors
+        input: -weight parameters and bias(w, b).
+               -input features and, output values(X, y).
+               -All input values except b are vectors
         returns: cost function and dictionary containing differential vectors of w amd b
     """
     m = X.shape[1]  # number of training examples
+    # Foreward propagation and cost computation
     z = np.dot(w.T,X) + b
     A = sigmoid(z)
-    cost = (-1/m) * np.sum(Y * np.log(A) + (1-Y) * np.log(1-A)) # Foreward propagation
-    dw = (1/m) * np.dot(X, (A-Y).T)  # back propagation
+    cost = (-1/m) * np.sum(Y * np.log(A) + (1-Y) * np.log(1-A)) 
+
+    # back propagation
+    dw = (1/m) * np.dot(X, (A-Y).T) 
     db = (1/m) * np.sum(A-Y)
-    assert w.shape == dw.shape, print('mismatch between vecor and differenial. see tuple pairs: ', (w.shape, dw.shape))
+
+    assert w.shape == dw.shape, print('mismatch between vector and differential. see tuple pairs: ', (w.shape, dw.shape))
     cost = np.squeeze(cost)
     grads = {'dw': dw,
              'db': db}
     return grads, cost
 
 def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
-    """ This function optimizes w and b by running a gradient descent algorithm """
+    """ 
+    This function optimizes w and b by running a gradient
+        descent algorithm, thereby updating them
+    input:  - weight parameters and bias(w, b).
+            - input features and, output values(X, y).
+            - numer of iterations (int preferably greater than 100)
+            - learning rate (float)
+            w, X and Y are vectors
+    returns: cost function and dictionary containing differential vectors of w amd b
+    """
     costs = []    
     for i in range(num_iterations):
-        # retrieve grads and cost
+        # retrieve grad-parameters and cost
         grads, cost = propagate(w, b, X, Y)
         # retrieve parameters
         dw, db = grads['dw'], grads['db']
         # update parameters
         w = w - (learning_rate*dw)
         b = b - (learning_rate*db)
-
         # record cost for every 100th iteration
         if i % 100 == 0:
             costs.append(cost)
@@ -95,7 +104,6 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
             'db':db }
     params = {'w': w,
              'b': b}
-
     return grads, params, costs
 
 def predict(w, b, X):
