@@ -160,20 +160,46 @@ def load_dataset():
     test_set_y_orig = test_set_y_orig.reshape((1, test_set_y_orig.shape[0]))
     return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
 
+def test_function(my_image, num_px):
+    # We preprocess the image to fit your algorithm.
+    fname = "images/" + my_image
+    image = np.array(ndimage.imread(fname, flatten=False))
+    image = image/255.
+    my_image = scipy.misc.imresize(image, size=(num_px, num_px)).reshape((1, num_px*num_px*3)).T
+    my_predicted_image = predict(d["w"], d["b"], my_image)
+    plt.imshow(image)
+    print("y = " + str(np.squeeze(my_predicted_image)) + ", your algorithm predicts a \"" + classes[int(np.squeeze(my_predicted_image)), ].decode("utf-8") + "\" picture.")
+# END CODE HERE ##
 
 
-train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_dataset()
-standard_train_x = flatten_and_standardize(train_set_x_orig)
-standard_test_x = flatten_and_standardize(test_set_x_orig)
+# # We preprocess the image to fit your algorithm.
+#     fname = "images/" + my_image
+#     image = np.array(ndimage.imread(fname, flatten=False))
+#     image = image/255.
+#     my_image = scipy.misc.imresize(image, size=(num_px, num_px)).reshape((1, num_px*num_px*3)).T
+#     my_predicted_image = predict(d["w"], d["b"], my_image)
 
-d = model(standard_train_x, train_set_y, standard_test_x, test_set_y, num_iterations=2000, learning_rate=0.005, print_cost=True)
+#     plt.imshow(image)
+#     print("y = " + str(np.squeeze(my_predicted_image)) + ", your algorithm predicts a \"" + classes[int(np.squeeze(my_predicted_image)), ].decode("utf-8") + "\" picture.")
 
-costs = np.squeeze(d['costs'])
-plt.plot(costs)
-plt.ylabel('cost')
-plt.xlabel('iterations (per hundreds)')
-plt.title("Learning rate =" + str(d["learning_rate"]))
-plt.show()
+
+#%%
+my_image = "dog_image1.jpg"
+num_px= 64
+test_function(my_image, num_px)
+
+# train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_dataset()
+# standard_train_x = flatten_and_standardize(train_set_x_orig)
+# standard_test_x = flatten_and_standardize(test_set_x_orig)
+
+# d = model(standard_train_x, train_set_y, standard_test_x, test_set_y, num_iterations=2000, learning_rate=0.005, print_cost=True)
+
+# costs = np.squeeze(d['costs'])
+# plt.plot(costs)
+# plt.ylabel('cost')
+# plt.xlabel('iterations (per hundreds)')
+# plt.title("Learning rate =" + str(d["learning_rate"]))
+# plt.show()
 
 
 #%%
