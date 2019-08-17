@@ -187,8 +187,8 @@ plt.xlabel('iterations (per hundreds)')
 plt.title("Learning rate =" + str(d["learning_rate"]))
 plt.show()
 
-
+##########INSERT IMAGE HERE############
 my_image = "dog_image1.jpg"
 num_px= 64
 test_function(my_image, num_px)
-#%%
+
