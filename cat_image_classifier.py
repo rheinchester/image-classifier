@@ -178,16 +178,15 @@ standard_test_x = flatten_and_standardize(test_set_x_orig)
 
 d = model(standard_train_x, train_set_y, standard_test_x, test_set_y, num_iterations=2000, learning_rate=0.005, print_cost=True)
 
-# costs = np.squeeze(d['costs'])
-# plt.plot(costs)
-# plt.ylabel('cost')
-# plt.xlabel('iterations (per hundreds)')
-# plt.title("Learning rate =" + str(d["learning_rate"]))
-# plt.show()
+costs = np.squeeze(d['costs'])
+plt.plot(costs)
+plt.ylabel('cost')
+plt.xlabel('iterations (per hundreds)')
+plt.title("Learning rate =" + str(d["learning_rate"]))
+plt.show()
 
-#######INSERT IMAGE HERE########
-my_image = "dog_image2.jpg"
+##########INSERT IMAGE HERE############
+my_image = "dog_image1.jpg"
 num_px= 64
-classify_image(my_image, num_px)
-
+test_function(my_image, num_px)
 
