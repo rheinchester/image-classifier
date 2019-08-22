@@ -1,5 +1,5 @@
 # My first cat image classifier
-### From Andrew ng's neural network deep learning specialization
+### From my solution to the week 1 assignment on Andrew ng's deep learning specialization
 Logistic regression is used to distinguish between cats and non-cats.
 ## Testing
 If you have Anaconda installed on your system, this classifier should work just fine.
