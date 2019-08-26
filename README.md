@@ -6,9 +6,13 @@ The classifier distinguishes between cats and non-cats.
 Gradient descent was used to reduce the cost function of the Logistic regression.
 ## Libraries
 numpy - n-dimensional array computation.
+
 matplotlib - matplotlib.pyplot was used to generate plots
+
 h5py - used to process the hdf5 file
+
 scipy- scipy.ndimage was used for multidimensional image processing
+
 PIL -  for opening, manipulating, and saving many different image file 
 
 ## Testing
