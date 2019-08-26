@@ -3,7 +3,7 @@
 ## Summary
 The classifier distinguishes between cats and non-cats.
 ## Algorithm
-Logistic regression
+Gradient descent was used to reduce the cost function of the Logistic regression.
 ## Libraries
 numpy - n-dimensional array computation.
 matplotlib - matplotlib.pyplot was used to generate plots
