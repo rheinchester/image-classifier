@@ -5,6 +5,12 @@ The classifier distinguishes between cats and non-cats.
 ## Algorithm
 Logistic regression
 ## Libraries
+numpy - n-dimensional array computation.
+matplotlib - matplotlib.pyplot was used to generate plots
+h5py - used to process the hdf5 file
+scipy- scipy.ndimage was used for multidimensional image processing
+PIL -  for opening, manipulating, and saving many different image file 
+
 ## Testing
 If you have Anaconda installed on your system, this classifier should work just fine.
 All you need do is download any image of your choice, go to the bottom cat-image-classifier.py
